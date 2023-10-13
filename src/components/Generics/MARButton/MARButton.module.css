@@ -1,0 +1,77 @@
+.MARSolidButton {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    font-family: "Montserrat", sans-serif;
+    padding: 0.5em 1em;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--bg-primary);
+    font-size: var(--font-size);
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--bg-primary);
+    color: var(--color-white);
+
+    &:active {
+        background-color: var(--bg-primary-dark);
+        color: var(--color-white);
+    }
+
+    &:focus,
+    &:focus-visible {
+        border: 1px solid var(--color-white);
+        outline: 3px solid var(--bg-primary-light);
+    }
+}
+
+.AppendIcon,
+.PrependIcon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.MAROutlinedButton {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    font-family: "Montserrat", sans-serif;
+    padding: 0.5em 1em;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--bg-primary);
+    font-size: var(--font-size);
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    outlined: 1px solid inherit;
+    transition: box-shadow 0.25s;
+
+    &:active {
+        background-color: var(--bg-primary-dark);
+        color: var(--color-white);
+    }
+
+    &:focus,
+    &:focus-visible {
+        border: 1px solid var(--color-white);
+        outline: 3px solid var(--bg-primary-light);
+    }
+}
+
+@media (hover: hover) {
+    .MARSolidButton {
+        &:hover:not(:active) {
+            background-color: var(--bg-primary-light);
+            color: var(--color-white);
+        }
+    }
+
+    .MAROutlinedButton {
+        &:hover:not(:active) {
+            background-color: var(--bg-primary-light);
+            color: var(--color-white);
+            border: 1px solid var(--color-white);
+            box-shadow: 0 0 0 2px var(--bg-primary-light);
+        }
+    }
+}

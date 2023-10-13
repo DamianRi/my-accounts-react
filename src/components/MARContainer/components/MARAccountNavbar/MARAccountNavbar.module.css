@@ -1,0 +1,7 @@
+.MARAccountNavbar {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    overflow-x: auto;
+}

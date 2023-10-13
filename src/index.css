@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poiret+One&display=swap");
+
+:root {
+    font-family: "Montserrat", sans-serif;
+
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: #213547;
+    background-color: #ffffff;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+
+    /* Typography size */
+    --font-size-4xl: 3.052rem;
+    --font-size-3xl: 2.441rem;
+    --font-size-2xl: 1.953rem;
+    --font-size-xl: 1.563rem;
+    --font-size-lg: 1.25rem;
+    --font-size: 1rem;
+    --font-size-sm: 0.8rem;
+    --font-size-xs: 0.64rem;
+    --font-size-2xs: 0.512rem;
+
+    /* Colors */
+    --color-text: #4a148c;
+    --color-white: #fff;
+
+    --bg-white: #fff;
+
+    --bg-primary-dark: #38006b;
+    --bg-primary: #4a148c;
+    --bg-primary-light: #7b1fa2;
+
+    /* Border radius */
+    --border-radius-2xl: 1rem;
+    --border-radius-xl: 0.75rem;
+    --border-radius-lg: 0.5rem;
+    --border-radius: 0.25rem;
+
+    color: var(--color-text);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        color: rgba(255, 255, 255, 0.87);
+        background-color: #242424;
+    }
+}
