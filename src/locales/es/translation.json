@@ -1,0 +1,13 @@
+{
+    "appName": "MisCuentas",
+    "accountNameField": "Nombre de la cuenta",
+    "accountNameFieldPlaceholder": "Ej. Comidas",
+    "accountNameRequiredError": "Es requerido un nombre para la cuenta",
+    "accountIncomesField": "Ingresos",
+    "accountIncomesFieldPlaceholder": "Ingreso inicial",
+    "accountIncomesRequiredError": "El ingreso debe ser mayor a 0",
+    "accountOutcomesField": "Gastos",
+    "accountOutcomesFieldPlaceholder": "Gasto inicial",
+    "accountBudgetField": "Presupuesto",
+    "saveButton": "Guardar"
+}

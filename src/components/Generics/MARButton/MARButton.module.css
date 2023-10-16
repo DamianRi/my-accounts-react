@@ -1,8 +1,9 @@
-.MARSolidButton {
+.MARSolidButton,
+.MARSolidButtonStretch {
     display: flex;
     justify-content: center;
     gap: 0.25rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--montserrat-family);
     padding: 0.5em 1em;
     border-radius: var(--border-radius);
     border: 1px solid var(--bg-primary);
@@ -30,11 +31,12 @@
     height: 1rem;
 }
 
-.MAROutlinedButton {
+.MAROutlinedButton,
+.MAROutlinedButtonStretch {
     display: flex;
     justify-content: center;
     gap: 0.25rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--montserrat-family);
     padding: 0.5em 1em;
     border-radius: var(--border-radius);
     border: 1px solid var(--bg-primary);
@@ -56,6 +58,11 @@
         border: 1px solid var(--color-white);
         outline: 3px solid var(--bg-primary-light);
     }
+}
+
+.MARSolidButtonStretch,
+.MAROutlinedButtonStretch {
+    width: 100%;
 }
 
 @media (hover: hover) {

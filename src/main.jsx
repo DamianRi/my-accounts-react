@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import './118n.js'
 
-library.add(faPlus)
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus, faTriangleExclamation, faDollarSign } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPlus, faTriangleExclamation, faDollarSign)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

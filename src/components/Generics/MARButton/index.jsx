@@ -9,6 +9,10 @@ const MARButton = ({ content, variant, prependIcon, appendIcon, onClick }) => {
                 return styles.MARSolidButton
             case 'outlined':
                 return styles.MAROutlinedButton
+            case 'solid-stretch':
+                return styles.MARSolidButtonStretch
+            case 'outlined-stretch':
+                return styles.MAROutlinedButtonStretch
             default:
                 return styles.MARButton
         }

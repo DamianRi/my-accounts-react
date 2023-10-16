@@ -1,0 +1,13 @@
+{
+    "appName": "MyAccounts",
+    "accountNameField": "Account name",
+    "accountNameFieldPlaceholder": "Ex. Food",
+    "accountNameRequiredError": "Account name is required",
+    "accountIncomesField": "Incomes",
+    "accountIncomesFieldPlaceholder": "Initial income",
+    "accountIncomesRequiredError": "Income grather than 0 is required",
+    "accountOutcomesField": "Outcomes",
+    "accountOutcomesFieldPlaceholder": "Initial expense",
+    "accountBudgetField": "Budget",
+    "saveButton": "Save"
+}
