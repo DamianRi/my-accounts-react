@@ -4,7 +4,7 @@
     gap: 0.25rem;
     padding: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0px 0px 12px -4px var(--color-text);
+    box-shadow: 0px 0px 6px -2px var(--bg-primary);
 }
 .MARAccountDetail {
     display: flex;
