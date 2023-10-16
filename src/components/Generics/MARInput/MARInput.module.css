@@ -54,6 +54,7 @@
     }
 }
 
-.MARInputErrorIcon {
+.MARError {
+    font-weight: bold;
     color: var(--color-error);
 }

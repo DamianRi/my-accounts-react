@@ -51,12 +51,12 @@ const MARInput = ({
                     />
                     {
                         error &&
-                        <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" className={styles.MARInputErrorIcon} />
+                        <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" className={styles.MARError} />
                     }
                     { appendIconComponent() }
                 </div>  
             </label>
-            { error && <small>{error}</small> }
+            { error && <small className={ styles.MARError }>{error}</small> }
         </div>
     )
 }
