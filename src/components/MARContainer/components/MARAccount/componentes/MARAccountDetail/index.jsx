@@ -3,6 +3,7 @@ import styles from './MARAccountDetail.module.css'
 import MARButton from "../../../../../Generics/MARButton"
 import { useTranslation } from "react-i18next"
 import MARInput from "../../../../../Generics/MARInput"
+import MARSelect from "../../../../../Generics/MARSelect"
 
 const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount)
 
@@ -12,7 +13,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const isNewAccount = account === undefined
 
     const [accountName, setAccountName] = useState(account ? account.name : '')
-    const [monthIndex, setMonthIndex] = useState(new Date().getMonth())
+    const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
     const [accountIncomes, setAccounIncomes] = useState(account && account.incomes || 0)
     const incomesFormat = formatAmount(accountIncomes)
@@ -27,18 +28,18 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const [accountIncomesError, setAccountIncomesError] = useState('')
 
     const months = [
-        'Enero',
-        'Febrero',
-        'Marzo',
-        'Abril',
-        'Mayo',
-        'Junio',
-        'Julio',
-        'Agosto',
-        'Septiembre',
-        'Octubre',
-        'Noviembre',
-        'Diciembre',
+        t('january'),
+        t('february'),
+        t('march'),
+        t('april'),
+        t('may'),
+        t('june'),
+        t('july'),
+        t('agust'),
+        t('september'),
+        t('october'),
+        t('november'),
+        t('dicember'),
     ]
 
     const validateRequiredFields = () => {
@@ -70,43 +71,40 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         }
     }
 
-    const handleMonthChange = (event) => {
-        setMonthIndex(event.target.value)
+    const handleOnPeriodChange = (event) => {
+        setPeriodIndex(event.target.value)
     }
 
-    const handleAccountNameChange = (event) => {
+    const handleOnAccountNameChange = (event) => {
         setAccountName(event.target.value)
         setAccountNameError('')
     }
 
-    const handleAccountIncomesChange = (event) => {
+    const handleOnAccountIncomesChange = (event) => {
         setAccounIncomes(event.target.value)
         setAccountIncomesError('')
     }
 
-    const handleAccountOutcomesChange = (event) => {
+    const handleOnAccountOutcomesChange = (event) => {
         setOutcomes(event.target.value)
     }
 
     return (
         <form className={ styles.MARAccountDetailForm } key={ account?.id ?? -1 }>
-            <select
-                name="monthSelected"
-                value={ monthIndex }
+            <MARSelect
+                id="accountPeriod"
+                label={ t('accountPeriod') }
+                value={ periodIndex }
+                options={ months }
+                onChange={ handleOnPeriodChange }
                 disabled={ isNewAccount }
-                onChange={ handleMonthChange }
-            >
-                { months.map(
-                    (month, index) =>
-                        <option key={ index } value={ index }>{ month }</option>
-                    )
-                }
-            </select>
+                variant={ !isNewAccount ? '' : 'no-editable' }
+            />
             <MARInput
                 label={t('accountNameField')}
                 id='accountName'
                 value={accountName}
-                onInput={ handleAccountNameChange }
+                onInput={ handleOnAccountNameChange }
                 placeholder={t('accountNameFieldPlaceholder')}
                 disabled={!isNewAccount}
                 error={accountNameError}
@@ -115,7 +113,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 label={t('accountIncomesField')}
                 id='accountIncomes'
                 value={ isNewAccount ? accountIncomes : incomesFormat }
-                onInput={ handleAccountIncomesChange }
+                onInput={ handleOnAccountIncomesChange }
                 placeholder={t('accountIncomesFieldPlaceholder')}
                 disabled={!isNewAccount}
                 error={accountIncomesError}
@@ -125,7 +123,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 label={ t('accountOutcomesField') }
                 id='accountOutcomes'
                 value={ isNewAccount ? accountOutcomes : outcomesFormat }
-                onInput={ handleAccountOutcomesChange }
+                onInput={ handleOnAccountOutcomesChange }
                 placeholder={ t('accountOutcomesFieldPlaceholder') }
                 disabled={!isNewAccount}
                 type="number"

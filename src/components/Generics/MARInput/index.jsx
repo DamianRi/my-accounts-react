@@ -25,7 +25,6 @@ const MARInput = ({
     }
 
     const variantContentClass = () => {
-        // TODO: terminar de mapear los estados
         switch (variant) {
             case 'no-editable':
                 return styles.MARInputContentNoFocusable  
