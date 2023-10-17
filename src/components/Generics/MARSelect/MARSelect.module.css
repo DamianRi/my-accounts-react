@@ -18,14 +18,14 @@
     width: 100%;
     height: 2rem;
     padding: 0.25rem 0.375rem;
-    border-radius: 0.25rem;
-    border: 1px solid var(--color-text);
-    color: var(--color-text);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--bg-primary);
+    color: var(--base-text-color);
     font-family: inherit;
     font-size: inherit;
 
     &:focus-within {
-        outline: 2px solid var(--color-text);
+        outline: 2px solid var(--bg-primary);
     }
 
     & > select {
@@ -34,11 +34,11 @@
         padding: 0;
         font-family: inherit;
         font-size: inherit;
-        color: var(--color-text);
-        background-color: var(--color-white);
+        color: var(--base-text-color);
+        background-color: var(--bg-neutral);
 
         &::placeholder {
-            color: var(--color-text);
+            /* color: var(--color-text); */
             opacity: 0.5;
         }
         &:focus,
@@ -49,9 +49,9 @@
 }
 
 .MARSelectorNoFocusable {
-    border: 1px solid transparent;
+    border: 1px solid var(--bg-neutral);
 
     & > select {
-        background-color: var(--color-white);
+        background-color: var(--bg-neutral);
     }
 }

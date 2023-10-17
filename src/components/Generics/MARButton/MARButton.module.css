@@ -11,18 +11,19 @@
     cursor: pointer;
     white-space: nowrap;
     background-color: var(--bg-primary);
-    color: var(--color-white);
+    color: var(--bg-primary-text);
     box-shadow: 0px 0px 6px -2px var(--bg-primary);
 
     &:active {
         background-color: var(--bg-primary-dark);
-        color: var(--color-white);
+        color: var(--bg-primary-text);
     }
 
     &:focus,
     &:focus-visible {
-        border: 1px solid var(--color-white);
-        outline: 3px solid var(--bg-primary-light);
+        border: 1px solid var(--bg-primary-text);
+        outline: 3px solid var(--bg-primary);
+        box-shadow: 0px 0px 6px -2px var(--bg-primary-light);
     }
 }
 
@@ -44,9 +45,9 @@
     font-size: var(--font-size);
     cursor: pointer;
     white-space: nowrap;
-    background-color: var(--color-white);
-    color: var(--color-text);
-    outlined: 1px solid inherit;
+    background-color: var(--bg-neutral);
+    color: var(--base-text-color);
+    outlined: 1px solid var(--bg-neutral-text);
     transition: box-shadow 0.25s;
     box-shadow: 0px 0px 6px -2px var(--bg-primary);
 
@@ -57,8 +58,9 @@
 
     &:focus,
     &:focus-visible {
-        border: 1px solid var(--color-white);
+        border: 1px solid var(--bg-primary-text);
         outline: 3px solid var(--bg-primary-light);
+        box-shadow: 0px 0px 6px -2px var(--bg-primary-light);
     }
 }
 
@@ -68,19 +70,21 @@
 }
 
 @media (hover: hover) {
-    .MARSolidButton {
+    .MARSolidButton,
+    .MARSolidButtonStretch {
         &:hover:not(:active) {
             background-color: var(--bg-primary-light);
-            color: var(--color-white);
+            color: var(--bg-primary-text);
         }
     }
 
-    .MAROutlinedButton {
+    .MAROutlinedButton,
+    .MAROutlinedButtonStretch {
         &:hover:not(:active) {
             background-color: var(--bg-primary-light);
-            color: var(--color-white);
-            border: 1px solid var(--color-white);
-            box-shadow: 0 0 0 2px var(--bg-primary-light);
+            color: var(--bg-primary-text);
+            /* border: 1px solid var(--bg-primary-text); */
+            /* box-shadow: 0 0 0 2px var(--bg-primary-light); */
         }
     }
 }

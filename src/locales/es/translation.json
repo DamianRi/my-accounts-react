@@ -22,5 +22,11 @@
     "accountOutcomesField": "Gastos",
     "accountOutcomesFieldPlaceholder": "Gasto inicial",
     "accountBudgetField": "Presupuesto",
-    "saveButton": "Guardar"
+    "saveButton": "Guardar",
+
+    "accountMovementsTitle": "Movimientos",
+    "accountMovementIncomeType": "INGRESO",
+    "accountMovementOutcomeType": "GASTO",
+    "saveAccountIncomeMovementButton": "Ingreso",
+    "saveAccountOutcomeMovementButton": "Gasto"
 }

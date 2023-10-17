@@ -34,6 +34,7 @@ const MARContainer = () => {
         // y que se genere su id automáticamente por parte de firebase
         const newAccount = Object.assign({}, account)
         newAccount.id = accounts.length + 1
+        newAccount.movements = []
         return newAccount
     }
 

@@ -22,5 +22,11 @@
     "accountOutcomesField": "Outcomes",
     "accountOutcomesFieldPlaceholder": "Initial expense",
     "accountBudgetField": "Budget",
-    "saveButton": "Save"
+    "saveButton": "Save",
+
+    "accountMovementsTitle": "Movements",
+    "accountMovementIncomeType": "INCOME",
+    "accountMovementOutcomeType": "OUTCOME",
+    "saveAccountIncomeMovementButton": "Income",
+    "saveAccountOutcomeMovementButton": "Outcome"
 }
