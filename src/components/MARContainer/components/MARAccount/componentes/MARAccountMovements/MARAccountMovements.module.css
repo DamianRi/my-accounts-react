@@ -1,9 +1,15 @@
 .MARAccountMovements {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 .MARAccountMovementsActions {
     display: flex;
     gap: 0.5rem;
     width: 100%;
+}
+.MARAccountMovementsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

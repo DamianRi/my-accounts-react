@@ -28,5 +28,10 @@
     "accountMovementIncomeType": "INGRESO",
     "accountMovementOutcomeType": "GASTO",
     "saveAccountIncomeMovementButton": "Ingreso",
-    "saveAccountOutcomeMovementButton": "Gasto"
+    "saveAccountOutcomeMovementButton": "Gasto",
+
+    "accountMovementDescription": "Descripción",
+    "accountMovementDescriptionError": "La descripción del movimiento es necesaria",
+    "accountMovementAmount": "Monto",
+    "accountMovementAmountError": "La cantidad debe ser mayor a 0"
 }

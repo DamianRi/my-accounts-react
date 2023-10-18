@@ -1,15 +1,78 @@
+import { useTranslation } from "react-i18next"
+import MARButton from "../../../../../../../Generics/MARButton"
+import MARAccountMovementsItemDescription from "./components/MARAccountMovementsItemDescription"
 import MARAccountMovementsItemHeader from "./components/MARAccountMovementsItemHeader"
+import styles from './MARAccountMovementsItem.module.css'
+import { useState } from "react"
 
-const MARAccountMovementsItem = ({ movement }) => {
-    console.log('Movement ', movement)
+const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, editable, onSaveMovement }) => {
+    const { t, } = useTranslation()
+
+    const [ descriptionState, setDescriptionState ] = useState(description)
+    const [ amountState, setAmountState ] = useState(amount)
+
+    const [movementDescriptionError, setmovementDescriptionError] = useState('')
+    const [movementAmountError, setmovementAmountError] = useState('')
+
+    const validateRequiredFields = () => {
+        let noErrorsInForm = true
+        if (descriptionState.length <= 0) {
+            noErrorsInForm = false
+            setmovementDescriptionError(t('accountMovementDescriptionError'))
+        }
+        if (amountState <= 0) {
+            noErrorsInForm = false
+            setmovementAmountError(t('accountMovementAmountError'))
+        }
+        return noErrorsInForm
+    }
+
+    const handleOnDescriptionChange = (event) => {
+        setDescriptionState(event.target.value)
+    }
+
+    const handleOnAmountChange = (event) => {
+        setAmountState(event.target.value)
+    }
+
+    const handleOnSaveMovement = (event) => {
+        event.preventDefault()
+        if (validateRequiredFields()) {            
+            const newMovement = {
+                type,
+                description: descriptionState,
+                amount: amountState,
+                creationDate: creationDate.toISOString()
+            }
+            onSaveMovement(newMovement)
+        }
+    }
+
     return (
-        <div>
+        <form className={ styles.MARAccountMovementsItem }>
             <MARAccountMovementsItemHeader
-                id={ `accountMovement-${movement.id}` }
-                type={0}
-                creationDate={undefined}
+                type={ type }
+                creationDate={ creationDate }
             ></MARAccountMovementsItemHeader>
-        </div>
+            <MARAccountMovementsItemDescription
+                id={id}
+                description={ descriptionState }
+                amount={ amountState }
+                onDescriptionChange={ handleOnDescriptionChange }
+                descriptionError={ movementDescriptionError }
+                onAmountChange={ handleOnAmountChange }
+                amountError={ movementAmountError }
+                disabled={ !editable }
+            ></MARAccountMovementsItemDescription>
+            {
+                editable &&
+                <MARButton
+                    content={ t('saveButton') }
+                    variant="solid-stretch"
+                    onClick={ handleOnSaveMovement }
+                ></MARButton>
+            }
+        </form>
     )
 }
 

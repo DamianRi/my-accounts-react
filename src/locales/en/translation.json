@@ -28,5 +28,10 @@
     "accountMovementIncomeType": "INCOME",
     "accountMovementOutcomeType": "OUTCOME",
     "saveAccountIncomeMovementButton": "Income",
-    "saveAccountOutcomeMovementButton": "Outcome"
+    "saveAccountOutcomeMovementButton": "Outcome",
+
+    "accountMovementDescription": "Description",
+    "accountMovementDescriptionError": "Movement name is required",
+    "accountMovementAmount": "Amount",
+    "accountMovementAmountError": "Amount must be gather than 0"
 }

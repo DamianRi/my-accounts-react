@@ -22,6 +22,7 @@ const accountsResult = [
 const MARContainer = () => {
     const [accounts, setAccounts] = useState(accountsResult)
     const [accountSelected, setAccountSelected] = useState(accounts.length > 0 ? accounts[0] : undefined)
+    const [accountMovements, setAccountMovements] = useState(accountSelected?.movements ?? [])
 
     const handleOnSaveAccount = (accountToSave) => {
         const newAccount = saveAccount(accountToSave)
@@ -53,6 +54,13 @@ const MARContainer = () => {
         setAccountSelected(account)
     }
 
+    const handleOnSaveMovement = (movement) => {
+        setAccountMovements([
+            movement,
+            ...accountMovements
+        ])
+    }
+
     return (
         <main className={ styles.MARContainer }>
             <MARAccountNavbar
@@ -63,7 +71,9 @@ const MARContainer = () => {
             <MARAccount
                 key={accountSelected && accountSelected.id || -1}
                 account={accountSelected}
+                movements={accountMovements}
                 onSaveAccount={ handleOnSaveAccount }
+                onSaveMovement={ handleOnSaveMovement }
             ></MARAccount>
         </main>
     );

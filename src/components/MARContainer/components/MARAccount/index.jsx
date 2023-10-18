@@ -2,10 +2,16 @@ import MARAccountDetail from './componentes/MARAccountDetail'
 import MARAccountMovements from './componentes/MARAccountMovements'
 import styles from './MARAccount.module.css'
 
-const MARAccount = ({ account, onSaveAccount }) => {
+const MARAccount = ({ account, movements, onSaveAccount, onSaveMovement }) => {
 
+    console.log('Movements ', movements)
+    
     const handleOnSaveAccount = (accountToSave) => {
         onSaveAccount(accountToSave)
+    }
+
+    const handleOnSaveMovement = (movement) => {
+        onSaveMovement(movement)
     }
 
     return (
@@ -15,7 +21,10 @@ const MARAccount = ({ account, onSaveAccount }) => {
                 onSaveAccount={ handleOnSaveAccount }
             ></MARAccountDetail>
             {
-                account && account.id && <MARAccountMovements account={ account }></MARAccountMovements>
+                account && account.id &&
+                <MARAccountMovements
+                    movements={ movements }
+                    onSaveMovement={ handleOnSaveMovement } />
             }
         </section>
     )

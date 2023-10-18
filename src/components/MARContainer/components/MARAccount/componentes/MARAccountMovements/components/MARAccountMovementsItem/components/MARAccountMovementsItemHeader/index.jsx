@@ -1,35 +1,32 @@
-import { useState } from "react"
-import MARSelect from "../../../../../../../../../Generics/MARSelect"
-import { useTranslation } from "react-i18next"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from './MARAccountMovementsItemHeader.module.css'
+import { useTranslation } from 'react-i18next'
 
-const MARAccountMovementsItemHeader = ({ id, type, creationDate }) => {
+const MARAccountMovementsItemHeader = ({ type, creationDate }) => {
     const { t, } = useTranslation()
-    const [movementType, setMovementType] = useState(type)
-    const options = [
-        { key: 0, text: t('accountMovementIncomeType') },
-        { key: 1, text: t('accountMovementOutcomeType') },
-    ]
 
-    const handleOnMovementTypeChange = (event) => {
-        setMovementType(event.target.value)
-    }
+    const creationDateFormat = (date) => Intl.DateTimeFormat().format(date)
 
-    const creationDateFormat = () => {
-        return Intl.DateTimeFormat().format(creationDate)
+    const movementTypeTag = () => {
+        if (type === 'outcome') {
+            return (
+                <div>
+                    <span>{ t('accountMovementOutcomeType') }</span> <FontAwesomeIcon icon="fa-solid fa-arrow-trend-down" />
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <span>{ t('accountMovementIncomeType') }</span> <FontAwesomeIcon icon="fa-solid fa-arrow-trend-up" />
+                </div>
+            )
+        }
     }
 
     return (
-        <div>
-            <MARSelect
-                id={id}
-                label="Tipo"
-                value={ movementType }
-                options={ options }
-                onChange={ handleOnMovementTypeChange }
-            />
-            {
-                creationDate && <small>{ creationDateFormat }</small>
-            }
+        <div className={ styles.MARAccountMovementsItemHeader}>
+            { movementTypeTag() }
+            <span>{ creationDateFormat(creationDate) }</span>
         </div>
     )
 }

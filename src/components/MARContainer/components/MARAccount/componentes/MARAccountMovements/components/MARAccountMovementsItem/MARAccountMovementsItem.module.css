@@ -1,2 +1,8 @@
 .MARAccountMovementsItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--bg-primary);
+    border-radius: var(--border-radius);
 }

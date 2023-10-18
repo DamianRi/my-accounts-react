@@ -2,16 +2,29 @@ import { useTranslation } from "react-i18next"
 import styles from "./MARAccountMovements.module.css"
 import MARAccountMovementsItem from "./components/MARAccountMovementsItem"
 import MARButton from "../../../../../Generics/MARButton"
+import { useState } from "react"
 
-const MARAccountMovements = ({ account }) => {
+const MARAccountMovements = ({ movements, onSaveMovement }) => {
     const { t, } = useTranslation()
 
-    const handleOnSaveIncomeMovement = (accountMovement) => {
-        console.log('Creando ingreso', accountMovement)
+    const incomeMovementType = 'income' // t('accountMovementIncomeType')
+    const outcomeMovementType = 'outcome' // t('accountMovementOutcomeType')
+    const [addNewMovement, setAddNewMovement] = useState(false)
+    const [newMovementType, setNewMovementType] = useState(incomeMovementType)
+
+    const handleOnCreateIncomeMovement = () => {
+        setAddNewMovement(true)
+        setNewMovementType(incomeMovementType)
+    }
+    
+    const handleOnCreateOutcomeMovement = () => {
+        setAddNewMovement(true)
+        setNewMovementType(outcomeMovementType)
     }
 
-    const handleOnSaveOutcomeMovement = (accountMovement) => {
-        console.log('Creando gasto', accountMovement)
+    const handleOnSaveMovement = (movement) => {
+        onSaveMovement(movement)
+        setAddNewMovement(false)
     }
 
     return (
@@ -22,21 +35,41 @@ const MARAccountMovements = ({ account }) => {
                     content={ t('saveAccountIncomeMovementButton') }
                     variant='outlined-stretch'
                     prependIcon="fa-plus"
-                    onClick={ handleOnSaveIncomeMovement }
+                    onClick={ handleOnCreateIncomeMovement }
                 ></MARButton>
                 <MARButton
                     content={ t('saveAccountOutcomeMovementButton') }
                     variant='solid-stretch'
                     prependIcon="fa-plus"
-                    onClick={ handleOnSaveOutcomeMovement }
+                    onClick={ handleOnCreateOutcomeMovement }
                 ></MARButton>
-                {/* TODO: Continuar manejando los eventos para crear los movimientos */}
             </div>
-            {
-                account?.movements && account.movements.map((movement, index) =>
-                    <MARAccountMovementsItem key={index} movement={movement} />
-                )
-            }
+            <div className={ styles.MARAccountMovementsList }>
+                {
+                    addNewMovement &&
+                    <MARAccountMovementsItem
+                        type={newMovementType}
+                        description={''}
+                        amount={0}
+                        creationDate={new Date()}
+                        editable={ true }
+                        onSaveMovement={ handleOnSaveMovement }
+                    />
+                }
+                {
+                    movements.map((movement, index) => {
+                        return <MARAccountMovementsItem
+                            key={index}
+                            id={index}
+                            type={movement.type}
+                            description={movement.description}
+                            amount={movement.amount}
+                            editable={ false }
+                            creationDate={new Date(movement.creationDate)}
+                        />
+                    })
+                }
+            </div>
         </section>
     )
 }
