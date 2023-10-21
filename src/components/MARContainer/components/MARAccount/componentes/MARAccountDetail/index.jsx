@@ -7,7 +7,7 @@ import MARSelect from "../../../../../Generics/MARSelect"
 
 const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount)
 
-const MARAccountDetail = ({ account, onSaveAccount }) => {
+const MARAccountDetail = ({ account, movements, onSaveAccount }) => {
     const { t, } = useTranslation()
 
     const isNewAccount = account === undefined
@@ -21,8 +21,18 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const [accountOutcomes, setOutcomes] = useState(account && account.outcomes || 0)
     const outcomesFormat = formatAmount(accountOutcomes)
 
-    const difference = accountIncomes - accountOutcomes
-    const differenceFormat = formatAmount(difference)
+    const getDifference = () => {
+        const outcomesByMovements = movements
+            .filter((movement) => movement.type === 'outcome')
+            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        const incomesByMovements = movements
+            .filter((movement) => movement.type === 'income')
+            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        const incomesTotal = parseFloat(accountIncomes) + incomesByMovements 
+        const outcomesTotal = parseFloat(accountOutcomes) + outcomesByMovements 
+        return incomesTotal - outcomesTotal
+    }
+    const differenceFormat = formatAmount(getDifference())
 
     const [accountNameError, setAccountNameError] = useState('')
     const [accountIncomesError, setAccountIncomesError] = useState('')
@@ -59,8 +69,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         event.preventDefault()
 
         if (!validateRequiredFields()) {
-            // TODO: Aquí se debería actualizar el estado del error para manejar dichos eventos
-            console.log('Llevar los campos faltantes', accountNameError, accountIncomesError)
+            return
         } else {
             const accountPrepared = {
                 name: accountName,
@@ -140,7 +149,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 <MARButton
                     content={ t('saveButton') }
                     variant="solid-stretch"
-                    onClick={ handleOnSaveAccount }
+                    onEventClick={ handleOnSaveAccount }
                 ></MARButton>
             }
         </form>

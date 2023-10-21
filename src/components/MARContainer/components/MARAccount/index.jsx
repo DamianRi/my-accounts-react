@@ -4,8 +4,6 @@ import styles from './MARAccount.module.css'
 
 const MARAccount = ({ account, movements, onSaveAccount, onSaveMovement }) => {
 
-    console.log('Movements ', movements)
-    
     const handleOnSaveAccount = (accountToSave) => {
         onSaveAccount(accountToSave)
     }
@@ -18,6 +16,7 @@ const MARAccount = ({ account, movements, onSaveAccount, onSaveMovement }) => {
         <section className={ styles.MARAccount }>
             <MARAccountDetail
                 account={ account }
+                movements={ movements }
                 onSaveAccount={ handleOnSaveAccount }
             ></MARAccountDetail>
             {

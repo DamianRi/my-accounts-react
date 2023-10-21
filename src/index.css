@@ -48,7 +48,13 @@
     --bg-primary-dark: #1f2d3d;
     --bg-disabled: #a9a9a9;
 
+    --bg-secondary-text: #f9f9f9;
+    --bg-secondary-light: #5bc0de;
+    --bg-secondary: #3498db;
+    --bg-secondary-dark: #2078a6;
+
     /* Border radius */
+    --border-radius-full: 6rem;
     --border-radius-2xl: 1rem;
     --border-radius-xl: 0.75rem;
     --border-radius-lg: 0.5rem;

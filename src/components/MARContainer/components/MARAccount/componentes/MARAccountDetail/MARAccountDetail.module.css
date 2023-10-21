@@ -3,11 +3,11 @@
     flex-direction: column;
     gap: 0.25rem;
     padding: 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius-xl);
     background-color: var(--bg-neutral);
     box-shadow: 0px 0px 6px -2px var(--bg-primary);
 }
-.MARAccountDetail {
+/* .MARAccountDetail {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -89,4 +89,4 @@
             outline: 2px solid var(--bg-white);
         }
     }
-}
+} */

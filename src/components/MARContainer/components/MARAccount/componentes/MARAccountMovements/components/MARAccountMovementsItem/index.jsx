@@ -69,7 +69,7 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
                 <MARButton
                     content={ t('saveButton') }
                     variant="solid-stretch"
-                    onClick={ handleOnSaveMovement }
+                    onEventClick={ handleOnSaveMovement }
                 ></MARButton>
             }
         </form>

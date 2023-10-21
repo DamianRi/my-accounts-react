@@ -6,7 +6,7 @@ const MARAccountNavbar = ({ accountSelected, accounts, onChangeAccount }) => {
     const accountsRender = accounts.map(account =>
         <MARButton key={account.id} content={account.name}
             variant={ account.id == accountSelected?.id ? 'solid' : 'outlined' }
-            onClick={ (event) => {
+            onEventClick={ (event) => {
                 event.stopPropagation()
                 onChangeAccount(account.id)
             }}
@@ -18,7 +18,7 @@ const MARAccountNavbar = ({ accountSelected, accounts, onChangeAccount }) => {
             { accounts.length > 0 && accountsRender }
             <MARButton key={-1} content="Agregar cuenta"
                 variant={ accountSelected === undefined ? 'solid' : 'outlined' } prependIcon="fa-plus"
-                onClick={ (event) => {
+                onEventClick={ (event) => {
                     event.stopPropagation()
                     onChangeAccount(undefined)
                 }}

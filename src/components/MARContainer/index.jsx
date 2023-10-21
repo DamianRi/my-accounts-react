@@ -5,24 +5,12 @@ import styles from './MARContainer.module.css'
 
 // TODO: Aquí debemos de obtener las cuentas disponibles
 // Esta debería ser la lista de cuentas en la base de datos
-const accountsResult = [
-    // { id: 1, name: 'Cuenta 1' },
-    // { id: 2, name: 'Cuenta 2' },
-    // { id: 3, name: 'Cuenta 3' },
-    // { id: 4, name: 'Cuenta 4' },
-    // {
-    //     id: -1,
-    //     name: 'Nueva cuenta',
-    //     incomes: 0,
-    //     outcomes: 0,
-    //     movements: []
-    // },
-]
+const accountsStored = [] // getAllAccounts(indexedDB)
 
 const MARContainer = () => {
-    const [accounts, setAccounts] = useState(accountsResult)
+    const [accounts, setAccounts] = useState(accountsStored)
     const [accountSelected, setAccountSelected] = useState(accounts.length > 0 ? accounts[0] : undefined)
-    const [accountMovements, setAccountMovements] = useState(accountSelected?.movements ?? [])
+    const [accountMovements, setAccountMovements] = useState([])
 
     const handleOnSaveAccount = (accountToSave) => {
         const newAccount = saveAccount(accountToSave)
@@ -36,6 +24,7 @@ const MARContainer = () => {
         const newAccount = Object.assign({}, account)
         newAccount.id = accounts.length + 1
         newAccount.movements = []
+        // TODO: Guardar cuenta en base de datos
         return newAccount
     }
 
@@ -52,6 +41,8 @@ const MARContainer = () => {
         // TODO: Aquí se podrá obtener el registro directo de base de datos 
         const account = getAccount(accountId, accounts)
         setAccountSelected(account)
+        // TODO: Obtener los movimientos relacionados a la la cuenta en base de datos
+        setAccountMovements(account.movements)
     }
 
     const handleOnSaveMovement = (movement) => {
@@ -59,6 +50,7 @@ const MARContainer = () => {
             movement,
             ...accountMovements
         ])
+        // TODO: Salvar el movimiento en la tabla
     }
 
     return (
