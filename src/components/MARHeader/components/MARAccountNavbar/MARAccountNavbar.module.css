@@ -2,6 +2,7 @@
     display: flex;
     gap: 0.5rem;
     width: 100%;
-    padding: 0.5rem 1rem;
+    padding: 0.25rem;
     overflow-x: auto;
+    z-index: 1;
 }

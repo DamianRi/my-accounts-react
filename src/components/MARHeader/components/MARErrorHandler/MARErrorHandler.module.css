@@ -1,0 +1,35 @@
+.MARErrorHandler {
+    font-family: var(--montserrat-family);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    border-radius: var(--border-radius-lg);
+    background-color: var(--color-error);
+    color: var(--color-white);
+    z-index: 1;
+
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    & > button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        padding: 0.25rem;
+        border: none;
+        border-radius: var(--border-radius-full);
+        background-color: var(--color-error);
+        color: var(--color-white);
+        &:hover {
+            background-color: var(--bg-neutral);
+            color: var(--color-error);
+        }
+    }
+}

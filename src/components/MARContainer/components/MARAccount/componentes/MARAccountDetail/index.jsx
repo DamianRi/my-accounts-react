@@ -1,33 +1,37 @@
 import { useState } from "react"
 import styles from './MARAccountDetail.module.css'
-import MARButton from "../../../../../Generics/MARButton"
 import { useTranslation } from "react-i18next"
+import MARButton from "../../../../../Generics/MARButton"
 import MARInput from "../../../../../Generics/MARInput"
 import MARSelect from "../../../../../Generics/MARSelect"
+import useStore from "../../../../../../state/userState"
 
 const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount)
 
-const MARAccountDetail = ({ account, movements, onSaveAccount }) => {
+const MARAccountDetail = ({ account, onSaveAccount }) => {
     const { t, } = useTranslation()
 
-    const isNewAccount = account === undefined
+    const { currentAccount } = useStore()
 
-    const [accountName, setAccountName] = useState(account ? account.name : '')
+    const isNewAccount = account.id === undefined
+
+    const [accountName, setAccountName] = useState(currentAccount.name ?? '')
     const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
-    const [accountIncomes, setAccounIncomes] = useState(account && account.incomes || 0)
+    const [accountIncomes, setAccounIncomes] = useState(currentAccount.incomes ?? 0)
     const incomesFormat = formatAmount(accountIncomes)
     
-    const [accountOutcomes, setOutcomes] = useState(account && account.outcomes || 0)
+    const [accountOutcomes, setOutcomes] = useState(currentAccount.outcomes ?? 0)
     const outcomesFormat = formatAmount(accountOutcomes)
 
     const getDifference = () => {
-        const outcomesByMovements = movements
-            .filter((movement) => movement.type === 'outcome')
-            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
-        const incomesByMovements = movements
-            .filter((movement) => movement.type === 'income')
-            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        // TODO: Aquí hay que hacer la suma de los movimientos
+        const outcomesByMovements = 0
+        //     .filter((movement) => movement.type === 'outcome')
+        //     .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        const incomesByMovements = 0
+        //     .filter((movement) => movement.type === 'income')
+        //     .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
         const incomesTotal = parseFloat(accountIncomes) + incomesByMovements 
         const outcomesTotal = parseFloat(accountOutcomes) + outcomesByMovements 
         return incomesTotal - outcomesTotal
@@ -135,7 +139,7 @@ const MARAccountDetail = ({ account, movements, onSaveAccount }) => {
                 onInput={ handleOnAccountOutcomesChange }
                 placeholder={ t('accountOutcomesFieldPlaceholder') }
                 disabled={!isNewAccount}
-                type="number"
+                type={ isNewAccount ? 'number' : 'text' }
                 variant={ isNewAccount ? '' : 'no-editable'} />
             <MARInput
                 label={ t('accountBudgetField') }

@@ -10,4 +10,6 @@ const firebaseConfig = {
 };
 
 export const firebaseAppConfig = initializeApp(firebaseConfig);
-import("./firebase_auth_google_provider");
+import("./firebase/firebase_auth_google_provider");
+import("./firebase/firebase_firestore_users");
+import("./firebase/firebase_firestore_users_accouts");

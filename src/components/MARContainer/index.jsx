@@ -1,69 +1,62 @@
 import { useState } from 'react'
 import MARAccount from './components/MARAccount'
-import MARAccountNavbar from './components/MARAccountNavbar'
 import styles from './MARContainer.module.css'
+import { addAccount } from '../../firebase/firebase_firestore_users_accouts'
+import useStore from '../../state/userState'
 
 // TODO: Aquí debemos de obtener las cuentas disponibles
 // Esta debería ser la lista de cuentas en la base de datos
-const accountsStored = [] // getAllAccounts(indexedDB)
+// const accountsStored = []
 
 const MARContainer = () => {
-    const [accounts, setAccounts] = useState(accountsStored)
-    const [accountSelected, setAccountSelected] = useState(accounts.length > 0 ? accounts[0] : undefined)
+    const { user, currentAccount, setCurrentAccount, fetchAccounts, currentAccountMovements, setError, setIsLoading } = useStore()
     const [accountMovements, setAccountMovements] = useState([])
 
-    const handleOnSaveAccount = (accountToSave) => {
-        const newAccount = saveAccount(accountToSave)
-        setAccounts([newAccount, ...accounts])
-        setAccountSelected(newAccount)
+    const handleOnSaveAccount = async (account) => {
+        await saveAccount(user.uid, account)
+            .then((newAccount) => {
+                fetchAccounts(user.uid)
+                    .then(() => {
+                        setCurrentAccount(newAccount)
+                    }) 
+            })
     }
 
-    const saveAccount = (account) => {
-        // TODO: Aquí debemos hacer la petición con la información de la cuenta
-        // y que se genere su id automáticamente por parte de firebase
-        const newAccount = Object.assign({}, account)
-        newAccount.id = accounts.length + 1
-        newAccount.movements = []
-        // TODO: Guardar cuenta en base de datos
-        return newAccount
-    }
-
-    const getAccount = (accountId, accounts) => {
-        // Esto podría ser indefinido
-        return accounts.find(account => account.id === accountId)
-    }    
-
-    const handleOnChangeAccount = (accountId) => {
-        if (accountId === undefined) {
-            setAccountSelected(undefined)
-            return
+    const saveAccount = async (userUID, account) => {
+        setIsLoading(true)
+        const newAccount = {
+            name: account.name,
+            incomes: account.incomes,
+            outcomes: account.outcomes,
+            creationDate: new Date().toISOString(),
         }
-        // TODO: Aquí se podrá obtener el registro directo de base de datos 
-        const account = getAccount(accountId, accounts)
-        setAccountSelected(account)
-        // TODO: Obtener los movimientos relacionados a la la cuenta en base de datos
-        setAccountMovements(account.movements)
+        await addAccount(userUID, newAccount)
+            .then((accountCreated) => {
+                newAccount.id = accountCreated.id
+                return newAccount
+            })
+            .catch(() => {
+                const error = new Error("Es necesario iniciar sesión para agregar nuevas cuentas.")
+                setError(error.message)
+                return Promise.reject(error)
+            })
+            .finally(() => setIsLoading(false))
     }
 
+    // TODO: HAcer el guardado de movimeintos en Firbase
     const handleOnSaveMovement = (movement) => {
         setAccountMovements([
             movement,
             ...accountMovements
         ])
-        // TODO: Salvar el movimiento en la tabla
     }
 
     return (
         <main className={ styles.MARContainer }>
-            <MARAccountNavbar
-                accountSelected={accountSelected}
-                accounts={accounts}
-                onChangeAccount={ handleOnChangeAccount }
-            ></MARAccountNavbar>
             <MARAccount
-                key={accountSelected && accountSelected.id || -1}
-                account={accountSelected}
-                movements={accountMovements}
+                key={currentAccount && currentAccount.id || -1}
+                account={currentAccount}
+                movements={currentAccountMovements}
                 onSaveAccount={ handleOnSaveAccount }
                 onSaveMovement={ handleOnSaveMovement }
             ></MARAccount>

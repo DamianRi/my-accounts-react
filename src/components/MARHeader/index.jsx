@@ -1,30 +1,50 @@
-import { useState } from 'react';
-import { login, logout } from '../../firebase_auth_google_provider';
+import { login, logout } from '../../firebase/firebase_auth_google_provider';
 import MARButton from '../Generics/MARButton';
 import styles from './MARHeader.module.css'
+import { addUser } from '../../firebase/firebase_firestore_users';
+import useStore from '../../state/userState';
+import MARAccountNavbar from './components/MARAccountNavbar';
+import MARErrorHandler from './components/MARErrorHandler';
 
 const MARHeader = ({ title }) => {
 
-    const [user, setUser] = useState({})
+    const {
+        setIsLoading,
+        user,
+        setUser,
+        removeUser,
+        fetchAccounts,
+        clearAccounts,
+        setError,
+        setCurrentAccount,
+    } = useStore()
 
     const handleLoginClick = async () => {
+        setIsLoading(true);
         await login()
             .then((result) => {
                 setUser(result.user)
+                addUser(result.user)
+                fetchAccounts(result.user.uid)
             })
             .catch((error) => {
-                console.error("Login error ", error)
+                setError(error.toString())
             })
+            .finally(() => setIsLoading(false))
     }
 
     const handleLogoutClick = async () => {
         await logout()
             .then(() => {
-                setUser({})
+                setIsLoading(true)
+                removeUser()
+                clearAccounts()
+                setCurrentAccount({})
             })
             .catch((error) => {
                 console.error("Logout error ", error)
             })
+            .finally(() => setIsLoading(false))
     }
 
     return (
@@ -46,6 +66,8 @@ const MARHeader = ({ title }) => {
                     </p>
                 </div>
             }
+            <MARErrorHandler></MARErrorHandler>
+            <MARAccountNavbar></MARAccountNavbar>
         </header>
     )
 }

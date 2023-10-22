@@ -1,8 +1,7 @@
-import { firebaseAppConfig } from "./firebase";
+import { firebaseAppConfig } from "../firebase";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseAuth = getAuth(firebaseAppConfig);
-
 const login = async () => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(firebaseAuth, googleProvider)
@@ -12,7 +11,12 @@ const login = async () => {
             const user = result.user;
             return { token, user };
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.error("Error on sign in ", error);
+            return Promise.reject(
+                new Error("Error on sign in with Google provider.")
+            );
+        });
 };
 
 const logout = async () => {
