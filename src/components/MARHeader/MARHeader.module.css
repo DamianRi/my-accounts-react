@@ -1,9 +1,11 @@
 .Header {
+    position: sticky;
+    top: 0;
     font-family: "Poiret One", sans-serif;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1rem 1rem 0;
+    padding: 1rem 1rem 0.25rem;
     width: 100%;
 }
 

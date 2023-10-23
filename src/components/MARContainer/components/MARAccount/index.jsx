@@ -14,6 +14,7 @@ const MARAccount = ({ account, movements, onSaveAccount, onSaveMovement }) => {
 
     return (
         <section className={ styles.MARAccount }>
+            <h2>Cuenta</h2>
             <MARAccountDetail
                 account={ account }
                 movements={ movements }

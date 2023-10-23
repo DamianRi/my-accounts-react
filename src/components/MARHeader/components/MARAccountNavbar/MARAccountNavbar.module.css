@@ -3,6 +3,7 @@
     gap: 0.5rem;
     width: 100%;
     padding: 0.25rem;
+    background-color: var(--bg-neutral);
     overflow-x: auto;
     z-index: 1;
 }
