@@ -16,16 +16,17 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         currentAccountMovements
     } = useStore()
 
-    const isNewAccount = account.id === undefined
+    const isNewAccount = account?.id === undefined
 
-    const [accountName, setAccountName] = useState(currentAccount.name ?? '')
+    const [accountName, setAccountName] = useState(currentAccount?.name ?? '')
+
     // TODO: Manejar posteriormente el periodo de los movimientos
     // const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
-    const [accountIncomes, setAccounIncomes] = useState(currentAccount.incomes ?? 0)
+    const [accountIncomes, setAccounIncomes] = useState(currentAccount?.incomes ?? 0)
     const incomesFormat = formatAmount(accountIncomes)
     
-    const [accountOutcomes, setOutcomes] = useState(currentAccount.outcomes ?? 0)
+    const [accountOutcomes, setOutcomes] = useState(currentAccount?.outcomes ?? 0)
     const outcomesFormat = formatAmount(accountOutcomes)
 
     const getDifference = () => {

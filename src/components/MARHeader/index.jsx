@@ -27,9 +27,9 @@ const MARHeader = ({ title }) => {
             .then((result) => {
                 setUser(result.user)
                 addUser(result.user)
-                fetchAccounts(result.user.uid)
                 setSuccessMessage("Se ha iniciado sesión.")
             })
+            .then(() => fetchAccounts())
             .catch((error) => {
                 setError(error.toString())
             })
@@ -42,7 +42,7 @@ const MARHeader = ({ title }) => {
                 setIsLoading(true)
                 removeUser()
                 clearAccounts()
-                setCurrentAccount(undefined, {})
+                setCurrentAccount({})
                 setSuccessMessage("Se ha cerrado la sesión.")
             })
             .catch((error) => {

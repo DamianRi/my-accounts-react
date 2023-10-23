@@ -8,7 +8,6 @@ const MARContainer = () => {
     const {
         user,
         currentAccount,
-        setCurrentAccount,
         fetchAccounts,
         currentAccountMovements,
         fetchAccountMovements,
@@ -20,9 +19,8 @@ const MARContainer = () => {
     const handleOnSaveAccount = async (account) => {
         const userUID = user.uid
         await saveAccount(userUID, account)
-            .then((newAccount) => {
-                setCurrentAccount(userUID, newAccount)
-                fetchAccounts(userUID)
+            .then(() => {
+                fetchAccounts()
             })
     }
 

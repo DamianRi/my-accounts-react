@@ -16,10 +16,12 @@ const useStore = create((set, get) => ({
     removeUser: () => set({ user: {} }),
     // Accounts
     accounts: [],
-    fetchAccounts: async (userUID) => {
+    fetchAccounts: async () => {
+        const userUID = get().user.uid;
         try {
             await set(() => ({ isLoading: true }));
             const accounts = userUID ? await getUserAccounts(userUID) : [];
+            if (accounts.length) await get().setCurrentAccount(accounts[0]);
             await set(() => ({ accounts, isLoading: false }));
         } catch (error) {
             console.error("Error al consultar accounts ", userUID, error);
@@ -28,7 +30,8 @@ const useStore = create((set, get) => ({
     },
     clearAccounts: () => set(() => ({ accounts: [] })),
     currentAccount: {},
-    setCurrentAccount: async (userUID, account) => {
+    setCurrentAccount: async (account) => {
+        const userUID = get().user.uid;
         set(() => ({ currentAccount: account }));
         if (userUID) {
             await get().fetchAccountMovements(userUID, account.id);
