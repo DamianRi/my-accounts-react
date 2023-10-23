@@ -39,10 +39,10 @@ const MARHeader = ({ title }) => {
                 setIsLoading(true)
                 removeUser()
                 clearAccounts()
-                setCurrentAccount({})
+                setCurrentAccount(undefined, {})
             })
             .catch((error) => {
-                console.error("Logout error ", error)
+                setError(error.toString())
             })
             .finally(() => setIsLoading(false))
     }

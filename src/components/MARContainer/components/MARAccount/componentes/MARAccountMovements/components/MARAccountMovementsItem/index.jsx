@@ -39,10 +39,8 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
         event.preventDefault()
         if (validateRequiredFields()) {            
             const newMovement = {
-                type,
                 description: descriptionState,
                 amount: amountState,
-                creationDate: creationDate.toISOString()
             }
             onSaveMovement(newMovement)
         }

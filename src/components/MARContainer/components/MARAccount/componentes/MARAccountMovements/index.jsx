@@ -13,13 +13,13 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
     const [newMovementType, setNewMovementType] = useState(incomeMovementType)
 
     const handleOnCreateIncomeMovement = () => {
-        setAddNewMovement(true)
         setNewMovementType(incomeMovementType)
+        setAddNewMovement(true)
     }
     
     const handleOnCreateOutcomeMovement = () => {
-        setAddNewMovement(true)
         setNewMovementType(outcomeMovementType)
+        setAddNewMovement(true)
     }
 
     const handleOnSaveMovement = (movement) => {
@@ -52,7 +52,7 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                 {
                     addNewMovement &&
                     <MARAccountMovementsItem
-                        type={newMovementType}
+                        type={ newMovementType }
                         description={''}
                         amount={0}
                         creationDate={new Date()}
@@ -62,10 +62,11 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                     />
                 }
                 {
-                    movements.map((movement, index) => {
+                    movements.map((movement) => {
+                        console.log("Movimiento ", movement)
                         return <MARAccountMovementsItem
-                            key={index}
-                            id={index}
+                            key={`account-movement-${movement.id}`}
+                            id={movement.id}
                             type={movement.type}
                             description={movement.description}
                             amount={movement.amount}

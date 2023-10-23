@@ -5,6 +5,7 @@ import styles from './MARAccountNavbar.module.css'
 const MARAccountNavbar = () => {
 
     const {
+        user,
         accounts,
         currentAccount,
         setCurrentAccount,
@@ -17,7 +18,7 @@ const MARAccountNavbar = () => {
             variant={ account.id == currentAccount?.id ? 'solid' : 'outlined' }
             onEventClick={ (event) => {
                 event.stopPropagation()
-                setCurrentAccount(account)
+                setCurrentAccount(user.uid, account)
             }}
         ></MARButton>
     )
@@ -32,7 +33,7 @@ const MARAccountNavbar = () => {
                 prependIcon="fa-plus"
                 onEventClick={ (event) => {
                     event.stopPropagation()
-                    setCurrentAccount({})
+                    setCurrentAccount(undefined, {})
                 }}
             ></MARButton>
         </nav>

@@ -1,7 +1,8 @@
 import { create } from "zustand";
-import { getUserAccounts } from "../firebase/firebase_firestore_users_accouts";
+import { getUserAccounts } from "../firebase/firebase_firestore_users_accounts";
+import { getUserAccountMovements } from "../firebase/firebase_firestore_users_accounts_movements";
 
-const useStore = create((set) => ({
+const useStore = create((set, get) => ({
     // Process
     isLoading: false,
     setIsLoading: (isLoading) => set(() => ({ isLoading })),
@@ -25,15 +26,40 @@ const useStore = create((set) => ({
     },
     clearAccounts: () => set(() => ({ accounts: [] })),
     currentAccount: {},
-    setCurrentAccount: (account) => {
+    setCurrentAccount: async (userUID, account) => {
         set(() => ({ currentAccount: account }));
-        // TODO: On set account, update account movements
+        if (userUID) {
+            await get().fetchAccountMovements(userUID, account.id);
+        } else {
+            await get().clearCurrentAccountMovements();
+        }
     },
     // Movements
     currentAccountMovements: [],
-    fetchAccountMovements: async (userUID, accountId) => {
-        console.log("TODO: getAccountMovements ", userUID, accountId);
+    fetchAccountMovements: async (userUID, accountID) => {
+        console.log(userUID, accountID);
+        try {
+            set(() => ({ isLoading: true }));
+            const movements =
+                userUID && accountID
+                    ? await getUserAccountMovements(userUID, accountID)
+                    : [];
+            set(() => ({
+                currentAccountMovements: movements,
+                isLoading: false,
+            }));
+        } catch (error) {
+            console.error(
+                "Error al obtener movimientos ",
+                userUID,
+                accountID,
+                error
+            );
+            set(() => ({ error, isLoading: false }));
+        }
     },
+    clearCurrentAccountMovements: () =>
+        set(() => ({ currentAccountMovements: [] })),
 }));
 
 export default useStore;

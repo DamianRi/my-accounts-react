@@ -27,13 +27,13 @@ export const getUserAccounts = async (userUID) => {
 
 export const addAccount = async (userUID, account) => {
     try {
-        const userAccountsCollectionRed = collection(
+        const userAccountsCollectionRef = collection(
             db,
             USERS_DOC,
             userUID,
             ACCOUNTS_DOC
         );
-        return await addDoc(userAccountsCollectionRed, {
+        return await addDoc(userAccountsCollectionRef, {
             name: account.name,
             incomes: parseFloat(account.incomes),
             outcomes: parseFloat(account.outcomes),
@@ -44,5 +44,3 @@ export const addAccount = async (userUID, account) => {
         return Promise.reject(new Error("Error on save account."));
     }
 };
-
-export default db;

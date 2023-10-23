@@ -1,23 +1,28 @@
-import { useState } from 'react'
 import MARAccount from './components/MARAccount'
 import styles from './MARContainer.module.css'
-import { addAccount } from '../../firebase/firebase_firestore_users_accouts'
+import { addAccount } from '../../firebase/firebase_firestore_users_accounts'
 import useStore from '../../state/userState'
-
-// TODO: Aquí debemos de obtener las cuentas disponibles
-// Esta debería ser la lista de cuentas en la base de datos
-// const accountsStored = []
+import { addUserAccountMovement } from '../../firebase/firebase_firestore_users_accounts_movements'
 
 const MARContainer = () => {
-    const { user, currentAccount, setCurrentAccount, fetchAccounts, currentAccountMovements, setError, setIsLoading } = useStore()
-    const [accountMovements, setAccountMovements] = useState([])
+    const {
+        user,
+        currentAccount,
+        setCurrentAccount,
+        fetchAccounts,
+        currentAccountMovements,
+        fetchAccountMovements,
+        setError,
+        setIsLoading
+    } = useStore()
 
     const handleOnSaveAccount = async (account) => {
-        await saveAccount(user.uid, account)
+        const userUID = user.uid
+        await saveAccount(userUID, account)
             .then((newAccount) => {
-                fetchAccounts(user.uid)
+                fetchAccounts(userUID)
                     .then(() => {
-                        setCurrentAccount(newAccount)
+                        setCurrentAccount(userUID, newAccount)
                     }) 
             })
     }
@@ -43,12 +48,32 @@ const MARContainer = () => {
             .finally(() => setIsLoading(false))
     }
 
-    // TODO: HAcer el guardado de movimeintos en Firbase
-    const handleOnSaveMovement = (movement) => {
-        setAccountMovements([
-            movement,
-            ...accountMovements
-        ])
+    const handleOnSaveMovement = async(movement) => {
+        await saveMovement(user.uid, currentAccount.id, movement)
+            .then(() => {
+                fetchAccountMovements(user.uid, currentAccount.id)
+            })
+    }
+
+    const saveMovement = async (userUID, accountID, movement) => {
+        setIsLoading(true)
+        const newMovement = {
+            amount: parseFloat(movement.amount),
+            creationDate: new Date().toISOString(),
+            description: movement.description,
+            type: movement.type,
+        }
+        await addUserAccountMovement(userUID, accountID, newMovement)
+            .then((movementCreated) => {
+                newMovement.id = movementCreated.id
+                return newMovement
+            })
+            .catch(() => {
+                const error = new Error("Ocurrió un error al crear el movimiento. Por favor, intenta de nuevo.")
+                setError(error.message)
+                return Promise.reject(error)
+            })
+            .finally(() => setIsLoading(false))
     }
 
     return (
