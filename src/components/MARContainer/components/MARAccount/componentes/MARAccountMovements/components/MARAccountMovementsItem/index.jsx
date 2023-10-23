@@ -71,7 +71,7 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
             ></MARAccountMovementsItemDescription>
             {
                 editable &&
-                <div>
+                <div className={ styles.MARAccountMovementsItemActions }>
                     <MARButton
                         content={ t('cancelButton') }
                         variant="outlined-secondary-stretch"

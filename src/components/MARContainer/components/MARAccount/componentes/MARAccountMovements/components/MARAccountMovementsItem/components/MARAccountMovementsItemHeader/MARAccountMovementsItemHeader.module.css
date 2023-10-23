@@ -1,4 +1,18 @@
 .MARAccountMovementsItemHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.MARAccountMovementOutcomeType,
+.MARAccountMovementIncomeType {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+.MARAccountMovementIncomeType {
+    color: var(--color-success);
+}
+
+.MARAccountMovementOutcomeType {
+    color: var(--color-error);
 }
