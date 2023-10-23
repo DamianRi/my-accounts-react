@@ -1,4 +1,11 @@
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+} from "firebase/firestore";
 import { firebaseAppConfig } from "../firebase";
 import { USERS_DOC } from "./firebase_firestore_users";
 
@@ -12,7 +19,11 @@ export const getUserAccounts = async (userUID) => {
         userUID,
         ACCOUNTS_DOC
     );
-    const querySnapshot = await getDocs(userAccountsCollectionRef);
+    const accountsQuery = query(
+        userAccountsCollectionRef,
+        orderBy("creationDate", "desc")
+    );
+    const querySnapshot = await getDocs(accountsQuery);
 
     return querySnapshot.docs.map((account) => {
         const accountData = account.data();
