@@ -21,10 +21,8 @@ const MARContainer = () => {
         const userUID = user.uid
         await saveAccount(userUID, account)
             .then((newAccount) => {
+                setCurrentAccount(userUID, newAccount)
                 fetchAccounts(userUID)
-                    .then(() => {
-                        setCurrentAccount(userUID, newAccount)
-                    }) 
             })
     }
 
@@ -38,16 +36,15 @@ const MARContainer = () => {
         }
         await addAccount(userUID, newAccount)
             .then((accountCreated) => {
-                setSuccessMessage(`La cuenta - ${accountCreated.name} - se ha guardado correctamente.`)
+                setSuccessMessage(`La cuenta - ${newAccount.name} - se ha guardado correctamente.`)
                 newAccount.id = accountCreated.id
-                return newAccount
             })
             .catch(() => {
                 const error = new Error("Es necesario iniciar sesión para agregar nuevas cuentas.")
                 setError(error.message)
-                return Promise.reject(error)
             })
             .finally(() => setIsLoading(false))
+        return newAccount.id ? newAccount : Promise.reject("Error al agregar cuenta")
     }
 
     const handleOnSaveMovement = async(movement) => {
