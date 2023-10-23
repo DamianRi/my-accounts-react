@@ -13,7 +13,8 @@ const MARContainer = () => {
         currentAccountMovements,
         fetchAccountMovements,
         setError,
-        setIsLoading
+        setIsLoading,
+        setSuccessMessage,
     } = useStore()
 
     const handleOnSaveAccount = async (account) => {
@@ -37,6 +38,7 @@ const MARContainer = () => {
         }
         await addAccount(userUID, newAccount)
             .then((accountCreated) => {
+                setSuccessMessage(`La cuenta - ${accountCreated.name} - se ha guardado correctamente.`)
                 newAccount.id = accountCreated.id
                 return newAccount
             })
@@ -57,7 +59,6 @@ const MARContainer = () => {
 
     const saveMovement = async (userUID, accountID, movement) => {
         setIsLoading(true)
-        console.log("saveMovement ", movement)
         const newMovement = {
             amount: parseFloat(movement.amount),
             creationDate: new Date().toISOString(),
@@ -66,6 +67,7 @@ const MARContainer = () => {
         }
         await addUserAccountMovement(userUID, accountID, newMovement)
             .then((movementCreated) => {
+                setSuccessMessage(`El movimiento - ${newMovement.description} - se ha guardado correctamente.`)
                 newMovement.id = movementCreated.id
                 return newMovement
             })

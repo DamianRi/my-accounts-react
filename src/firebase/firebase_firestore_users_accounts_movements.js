@@ -49,7 +49,6 @@ export const addUserAccountMovement = async (userUID, accountID, movement) => {
             accountID,
             MOVEMENTS_DOC
         );
-        console.log("movement ", movement);
         return await addDoc(userAccountMovementsCollRef, {
             amount: parseFloat(movement.amount),
             creationDate: movement.creationDate,

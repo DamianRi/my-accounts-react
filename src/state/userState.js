@@ -8,6 +8,8 @@ const useStore = create((set, get) => ({
     setIsLoading: (isLoading) => set(() => ({ isLoading })),
     error: null,
     setError: (error) => set(() => ({ error })),
+    successMessage: null,
+    setSuccessMessage: (message) => set(() => ({ successMessage: message })),
     // User
     user: {},
     setUser: (user) => set(() => ({ user: user })),

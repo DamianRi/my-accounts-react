@@ -6,9 +6,9 @@ import './118n.js'
 import './firebase.js'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faXmark, faSpinner, faUser, faPlus, faTriangleExclamation, faDollarSign, faArrowTrendDown, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck, faXmark, faSpinner, faUser, faPlus, faTriangleExclamation, faDollarSign, faArrowTrendDown, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faXmark, faSpinner, faUser, faPlus, faTriangleExclamation, faDollarSign, faArrowTrendDown, faArrowTrendUp)
+library.add(faCircleCheck, faXmark, faSpinner, faUser, faPlus, faTriangleExclamation, faDollarSign, faArrowTrendDown, faArrowTrendUp)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

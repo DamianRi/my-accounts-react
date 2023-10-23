@@ -5,6 +5,7 @@ import { addUser } from '../../firebase/firebase_firestore_users';
 import useStore from '../../state/userState';
 import MARAccountNavbar from './components/MARAccountNavbar';
 import MARErrorHandler from './components/MARErrorHandler';
+import MARSuccessMessage from './components/MARSuccessMessage';
 
 const MARHeader = ({ title }) => {
 
@@ -17,6 +18,7 @@ const MARHeader = ({ title }) => {
         clearAccounts,
         setError,
         setCurrentAccount,
+        setSuccessMessage,
     } = useStore()
 
     const handleLoginClick = async () => {
@@ -26,6 +28,7 @@ const MARHeader = ({ title }) => {
                 setUser(result.user)
                 addUser(result.user)
                 fetchAccounts(result.user.uid)
+                setSuccessMessage("Se ha iniciado sesión.")
             })
             .catch((error) => {
                 setError(error.toString())
@@ -40,6 +43,7 @@ const MARHeader = ({ title }) => {
                 removeUser()
                 clearAccounts()
                 setCurrentAccount(undefined, {})
+                setSuccessMessage("Se ha cerrado la sesión.")
             })
             .catch((error) => {
                 setError(error.toString())
@@ -66,6 +70,7 @@ const MARHeader = ({ title }) => {
                     </p>
                 </div>
             }
+            <MARSuccessMessage></MARSuccessMessage>
             <MARErrorHandler></MARErrorHandler>
             <MARAccountNavbar></MARAccountNavbar>
         </header>
