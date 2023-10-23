@@ -1,5 +1,7 @@
 .MARSolidButton,
-.MARSolidButtonStretch {
+.MARSolidStretchButton,
+.MARSolidSecondaryButton,
+.MARSolidSecondaryStretchButton {
     display: flex;
     justify-content: center;
     gap: 0.25rem;
@@ -27,6 +29,25 @@
     }
 }
 
+.MARSolidSecondaryButton,
+.MARSolidSecondaryStretchButton {
+    border: 1px solid var(--bg-secondary);
+    background-color: var(--bg-secondary);
+    color: var(--bg-secondary-text);
+
+    &:active {
+        background-color: var(--bg-secondary-dark);
+        color: var(--bg-secondary-text);
+    }
+
+    &:focus,
+    &:focus-visible {
+        border: 1px solid var(--bg-secondary-text);
+        outline: 3px solid var(--bg-secondary);
+        box-shadow: 0px 0px 6px -2px var(--bg-secondary-light);
+    }
+}
+
 .AppendIcon,
 .PrependIcon {
     width: 1rem;
@@ -34,7 +55,9 @@
 }
 
 .MAROutlinedButton,
-.MAROutlinedButtonStretch {
+.MAROutlinedButtonStretch,
+.MAROutlinedSecondaryButton,
+.MAROutlinedSecondaryStretchButton {
     display: flex;
     justify-content: center;
     gap: 0.25rem;
@@ -47,7 +70,7 @@
     white-space: nowrap;
     background-color: var(--bg-neutral);
     color: var(--base-text-color);
-    outlined: 1px solid var(--bg-neutral-text);
+    outline: 1px solid var(--bg-neutral-text);
     transition: box-shadow 0.25s;
 
     &:active {
@@ -63,27 +86,51 @@
     }
 }
 
-.MARSolidButtonStretch,
-.MAROutlinedButtonStretch {
+.MAROutlinedSecondaryButton,
+.MAROutlinedSecondaryStretchButton {
+    border: 1px solid var(--bg-secondary);
+    outline: 1px solid var(--bg-secondary);
+    color: var(--bg-secondary);
+
+    &:active {
+        background-color: var(--bg-secondary-dark);
+        color: var(--color-white);
+    }
+
+    &:focus,
+    &:focus-visible {
+        border: 1px solid var(--bg-secondary-text);
+        outline: 3px solid var(--bg-secondary-light);
+        box-shadow: 0px 0px 6px -2px var(--bg-secondary-light);
+    }
+}
+
+/* // TODO: terminar de hacer los estilos para los botones secundarios */
+.MARSolidStretchButton,
+.MAROutlinedButtonStretch,
+.MARSolidSecondaryStretchButton,
+.MAROutlinedSecondaryStretchButton {
     width: 100%;
 }
 
 @media (hover: hover) {
     .MARSolidButton,
-    .MARSolidButtonStretch {
+    .MARSolidStretchButton,
+    .MAROutlinedButton,
+    .MAROutlinedButtonStretch {
         &:hover:not(:active) {
             background-color: var(--bg-primary-light);
             color: var(--bg-primary-text);
         }
     }
 
-    .MAROutlinedButton,
-    .MAROutlinedButtonStretch {
+    .MARSolidSecondaryButton,
+    .MARSolidSecondaryStretchButton,
+    .MAROutlinedSecondaryButton,
+    .MAROutlinedSecondaryStretchButton {
         &:hover:not(:active) {
-            background-color: var(--bg-primary-light);
-            color: var(--bg-primary-text);
-            /* border: 1px solid var(--bg-primary-text); */
-            /* box-shadow: 0 0 0 2px var(--bg-primary-light); */
+            background-color: var(--bg-secondary-light);
+            color: var(--bg-secondary-text);
         }
     }
 }

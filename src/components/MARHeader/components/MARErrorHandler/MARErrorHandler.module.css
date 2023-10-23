@@ -27,6 +27,9 @@
         border-radius: var(--border-radius-full);
         background-color: var(--color-error);
         color: var(--color-white);
+        cursor: pointer;
+        transition: background-color 150ms;
+
         &:hover {
             background-color: var(--bg-neutral);
             color: var(--color-error);

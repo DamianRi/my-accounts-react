@@ -33,13 +33,13 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
             <div className={ styles.MARAccountMovementsActions }>
                 <MARButton
                     content={ t('saveAccountIncomeMovementButton') }
-                    variant='outlined-stretch'
+                    variant='outlined-secondary-stretch'
                     prependIcon="fa-plus"
                     onEventClick={ handleOnCreateIncomeMovement }
                 ></MARButton>
                 <MARButton
                     content={ t('saveAccountOutcomeMovementButton') }
-                    variant='solid-stretch'
+                    variant='solid-secondary-stretch'
                     prependIcon="fa-plus"
                     onEventClick={ handleOnCreateOutcomeMovement }
                 ></MARButton>
