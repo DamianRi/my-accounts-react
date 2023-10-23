@@ -5,7 +5,7 @@ import MARAccountMovementsItemHeader from "./components/MARAccountMovementsItemH
 import styles from './MARAccountMovementsItem.module.css'
 import { useState } from "react"
 
-const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, editable, onSaveMovement }) => {
+const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, editable, onSaveMovement, onCancelMovement }) => {
     const { t, } = useTranslation()
 
     const [ descriptionState, setDescriptionState ] = useState(description)
@@ -48,6 +48,11 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
         }
     }
 
+    const handleOnCancelMovement = (event) => {
+        event.preventDefault()
+        onCancelMovement()
+    }
+
     return (
         <form className={ styles.MARAccountMovementsItem }>
             <MARAccountMovementsItemHeader
@@ -66,11 +71,18 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
             ></MARAccountMovementsItemDescription>
             {
                 editable &&
-                <MARButton
-                    content={ t('saveButton') }
-                    variant="solid-stretch"
-                    onEventClick={ handleOnSaveMovement }
-                ></MARButton>
+                <div>
+                    <MARButton
+                        content={ t('cancelButton') }
+                        variant="outlined-secondary-stretch"
+                        onEventClick={ handleOnCancelMovement }
+                    ></MARButton>
+                    <MARButton
+                        content={ t('saveButton') }
+                        variant="solid-secondary-stretch"
+                        onEventClick={ handleOnSaveMovement }
+                    ></MARButton>
+                </div>
             }
         </form>
     )

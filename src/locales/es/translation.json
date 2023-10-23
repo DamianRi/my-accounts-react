@@ -23,6 +23,7 @@
     "accountOutcomesFieldPlaceholder": "Gasto inicial",
     "accountBudgetField": "Presupuesto",
     "saveButton": "Guardar",
+    "cancelButton": "Cancelar",
 
     "accountMovementsTitle": "Movimientos",
     "accountMovementIncomeType": "INGRESO",

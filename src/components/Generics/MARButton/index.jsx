@@ -28,9 +28,9 @@ const MARButton = ({ content, variant, prependIcon, appendIcon, onEventClick }) 
 
     return (
         <button className={variantClass()} onClick={onEventClick}>
-            { prependIcon && <span className={styles.AppendIcon}><FontAwesomeIcon icon={`fa-solid ${prependIcon}`} /></span>}
+            { prependIcon && <span className={styles.PrependIcon}><FontAwesomeIcon icon={`fa-solid ${prependIcon}`} /></span>}
             { content }
-            { appendIcon && <span className={styles.PrependIcon}><FontAwesomeIcon icon={`fa-solid ${appendIcon}`} /></span>}
+            { appendIcon && <span className={styles.AppendIcon}><FontAwesomeIcon icon={`fa-solid ${appendIcon}`} /></span>}
         </button>
     )
 }

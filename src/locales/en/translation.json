@@ -23,6 +23,7 @@
     "accountOutcomesFieldPlaceholder": "Initial expense",
     "accountBudgetField": "Budget",
     "saveButton": "Save",
+    "cancelButton": "Cancel",
 
     "accountMovementsTitle": "Movements",
     "accountMovementIncomeType": "INCOME",

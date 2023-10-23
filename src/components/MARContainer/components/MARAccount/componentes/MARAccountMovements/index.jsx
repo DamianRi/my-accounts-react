@@ -27,6 +27,10 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
         setAddNewMovement(false)
     }
 
+    const handleOnCancelMovement = () => {
+        setAddNewMovement(false)
+    }
+
     return (
         <section className={ styles.MARAccountMovements }>
             <h2>{ t('accountMovementsTitle') }</h2>
@@ -34,13 +38,13 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                 <MARButton
                     content={ t('saveAccountIncomeMovementButton') }
                     variant='outlined-secondary-stretch'
-                    prependIcon="fa-plus"
+                    prependIcon="fa-arrow-trend-up"
                     onEventClick={ handleOnCreateIncomeMovement }
                 ></MARButton>
                 <MARButton
                     content={ t('saveAccountOutcomeMovementButton') }
-                    variant='solid-secondary-stretch'
-                    prependIcon="fa-plus"
+                    variant='outlined-secondary-stretch'
+                    appendIcon="fa-arrow-trend-down"
                     onEventClick={ handleOnCreateOutcomeMovement }
                 ></MARButton>
             </div>
@@ -54,6 +58,7 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                         creationDate={new Date()}
                         editable={ true }
                         onSaveMovement={ handleOnSaveMovement }
+                        onCancelMovement={ handleOnCancelMovement }
                     />
                 }
                 {
