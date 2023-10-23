@@ -2,12 +2,14 @@ import { useTranslation } from "react-i18next"
 import MARInput from "../../../../../../../../../Generics/MARInput"
 import styles from './MARAccountMovementsItemDesc.module.css'
 
-const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount)
+const formatAmount = (amount) =>
+    Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', signDisplay: 'always' }).format(amount)
 
 const MARAccountMovementsItemDescription = ({
     id,
     description,
     amount,
+    type,
     disabled,
     onDescriptionChange,
     descriptionError,
@@ -15,6 +17,14 @@ const MARAccountMovementsItemDescription = ({
     amountError
 }) => {
     const { t, } = useTranslation()
+
+    const getAmountValue = (amount) => {
+        if (disabled) {
+            return formatAmount(type === 'outcome' ? amount * -1 : amount)
+        } else {
+            return amount
+        }
+    }
 
     return (
         <div className={ styles.MARAccountMovementsItemDescription }>
@@ -31,7 +41,7 @@ const MARAccountMovementsItemDescription = ({
             <MARInput
                 id={ `${id}Amount` }
                 label={ t('accountMovementAmount') }
-                value={ disabled ? formatAmount(amount) : amount }
+                value={ getAmountValue(amount) }
                 onInput={ onAmountChange }
                 placeholder={ t('accountMovementAmount') }
                 type={ disabled ? "text" : "number"}

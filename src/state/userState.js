@@ -37,7 +37,6 @@ const useStore = create((set, get) => ({
     // Movements
     currentAccountMovements: [],
     fetchAccountMovements: async (userUID, accountID) => {
-        console.log(userUID, accountID);
         try {
             set(() => ({ isLoading: true }));
             const movements =

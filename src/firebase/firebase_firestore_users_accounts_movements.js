@@ -1,4 +1,11 @@
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    orderBy,
+    query,
+} from "firebase/firestore";
 import { firebaseAppConfig } from "../firebase";
 import { USERS_DOC } from "./firebase_firestore_users";
 import { ACCOUNTS_DOC } from "./firebase_firestore_users_accounts";
@@ -7,7 +14,7 @@ const db = getFirestore(firebaseAppConfig);
 export const MOVEMENTS_DOC = "movements";
 
 export const getUserAccountMovements = async (userUID, accountID) => {
-    const userAccountCollRef = collection(
+    const userAccountMovementsCollRef = collection(
         db,
         USERS_DOC,
         userUID,
@@ -15,7 +22,11 @@ export const getUserAccountMovements = async (userUID, accountID) => {
         accountID,
         MOVEMENTS_DOC
     );
-    const querySnapshot = await getDocs(userAccountCollRef);
+    const movementsQuery = query(
+        userAccountMovementsCollRef,
+        orderBy("creationDate", "desc")
+    );
+    const querySnapshot = await getDocs(movementsQuery);
     return querySnapshot.docs.map((movement) => {
         const movementData = movement.data();
         return {
@@ -38,6 +49,7 @@ export const addUserAccountMovement = async (userUID, accountID, movement) => {
             accountID,
             MOVEMENTS_DOC
         );
+        console.log("movement ", movement);
         return await addDoc(userAccountMovementsCollRef, {
             amount: parseFloat(movement.amount),
             creationDate: movement.creationDate,

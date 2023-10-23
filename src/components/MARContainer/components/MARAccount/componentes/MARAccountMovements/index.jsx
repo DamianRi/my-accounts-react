@@ -63,7 +63,6 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                 }
                 {
                     movements.map((movement) => {
-                        console.log("Movimiento ", movement)
                         return <MARAccountMovementsItem
                             key={`account-movement-${movement.id}`}
                             id={movement.id}

@@ -3,7 +3,7 @@ import styles from './MARAccountDetail.module.css'
 import { useTranslation } from "react-i18next"
 import MARButton from "../../../../../Generics/MARButton"
 import MARInput from "../../../../../Generics/MARInput"
-import MARSelect from "../../../../../Generics/MARSelect"
+// import MARSelect from "../../../../../Generics/MARSelect"
 import useStore from "../../../../../../state/userState"
 
 const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount)
@@ -11,12 +11,16 @@ const formatAmount = (amount) => Intl.NumberFormat('es-MX', { style: 'currency',
 const MARAccountDetail = ({ account, onSaveAccount }) => {
     const { t, } = useTranslation()
 
-    const { currentAccount } = useStore()
+    const {
+        currentAccount,
+        currentAccountMovements
+    } = useStore()
 
     const isNewAccount = account.id === undefined
 
     const [accountName, setAccountName] = useState(currentAccount.name ?? '')
-    const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
+    // TODO: Manejar posteriormente el periodo de los movimientos
+    // const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
     const [accountIncomes, setAccounIncomes] = useState(currentAccount.incomes ?? 0)
     const incomesFormat = formatAmount(accountIncomes)
@@ -25,13 +29,12 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const outcomesFormat = formatAmount(accountOutcomes)
 
     const getDifference = () => {
-        // TODO: Aquí hay que hacer la suma de los movimientos
-        const outcomesByMovements = 0
-        //     .filter((movement) => movement.type === 'outcome')
-        //     .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
-        const incomesByMovements = 0
-        //     .filter((movement) => movement.type === 'income')
-        //     .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        const outcomesByMovements = currentAccountMovements
+            .filter((movement) => movement.type === 'outcome')
+            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
+        const incomesByMovements = currentAccountMovements
+            .filter((movement) => movement.type === 'income')
+            .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
         const incomesTotal = parseFloat(accountIncomes) + incomesByMovements 
         const outcomesTotal = parseFloat(accountOutcomes) + outcomesByMovements 
         return incomesTotal - outcomesTotal
@@ -41,20 +44,20 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const [accountNameError, setAccountNameError] = useState('')
     const [accountIncomesError, setAccountIncomesError] = useState('')
 
-    const months = [
-        t('january'),
-        t('february'),
-        t('march'),
-        t('april'),
-        t('may'),
-        t('june'),
-        t('july'),
-        t('agust'),
-        t('september'),
-        t('october'),
-        t('november'),
-        t('dicember'),
-    ]
+    // const months = [
+    //     t('january'),
+    //     t('february'),
+    //     t('march'),
+    //     t('april'),
+    //     t('may'),
+    //     t('june'),
+    //     t('july'),
+    //     t('agust'),
+    //     t('september'),
+    //     t('october'),
+    //     t('november'),
+    //     t('dicember'),
+    // ]
 
     const validateRequiredFields = () => {
         let noErrorsInForm = true
@@ -84,9 +87,9 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         }
     }
 
-    const handleOnPeriodChange = (event) => {
-        setPeriodIndex(event.target.value)
-    }
+    // const handleOnPeriodChange = (event) => {
+    //     setPeriodIndex(event.target.value)
+    // }
 
     const handleOnAccountNameChange = (event) => {
         setAccountName(event.target.value)
@@ -104,6 +107,8 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
 
     return (
         <form className={ styles.MARAccountDetailForm } key={ account?.id ?? -1 }>
+            {/* 
+            TODO: Manejar posteriormente el periodo de los movimientos
             <MARSelect
                 id="accountPeriod"
                 label={ t('accountPeriod') }
@@ -113,6 +118,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 disabled={ isNewAccount }
                 variant={ !isNewAccount ? '' : 'no-editable' }
             />
+            */}
             <MARInput
                 label={t('accountNameField')}
                 id='accountName'

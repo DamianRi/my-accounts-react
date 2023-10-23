@@ -5,7 +5,16 @@ import MARAccountMovementsItemHeader from "./components/MARAccountMovementsItemH
 import styles from './MARAccountMovementsItem.module.css'
 import { useState } from "react"
 
-const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, editable, onSaveMovement, onCancelMovement }) => {
+const MARAccountMovementsItem = ({
+    id,
+    type,
+    description,
+    amount,
+    creationDate,
+    editable,
+    onSaveMovement,
+    onCancelMovement
+}) => {
     const { t, } = useTranslation()
 
     const [ descriptionState, setDescriptionState ] = useState(description)
@@ -41,6 +50,7 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
             const newMovement = {
                 description: descriptionState,
                 amount: amountState,
+                type: type
             }
             onSaveMovement(newMovement)
         }
@@ -59,6 +69,7 @@ const MARAccountMovementsItem = ({ id, type, description, amount, creationDate, 
             ></MARAccountMovementsItemHeader>
             <MARAccountMovementsItemDescription
                 id={id}
+                type={ type }
                 description={ descriptionState }
                 amount={ amountState }
                 onDescriptionChange={ handleOnDescriptionChange }

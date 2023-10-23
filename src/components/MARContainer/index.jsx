@@ -57,6 +57,7 @@ const MARContainer = () => {
 
     const saveMovement = async (userUID, accountID, movement) => {
         setIsLoading(true)
+        console.log("saveMovement ", movement)
         const newMovement = {
             amount: parseFloat(movement.amount),
             creationDate: new Date().toISOString(),
