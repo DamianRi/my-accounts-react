@@ -3,12 +3,11 @@ import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
-    // browserSessionPersistence,
     browserLocalPersistence,
 } from "firebase/auth";
 
 const firebaseAuth = getAuth(firebaseAppConfig);
-await firebaseAuth.setPersistence(browserLocalPersistence);
+firebaseAuth.setPersistence(browserLocalPersistence);
 
 const login = async () => {
     const googleProvider = new GoogleAuthProvider();
