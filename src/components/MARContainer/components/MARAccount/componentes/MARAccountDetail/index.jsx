@@ -23,11 +23,11 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     // TODO: Manejar posteriormente el periodo de los movimientos
     // const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
-    const [accountIncomes, setAccounIncomes] = useState(currentAccount?.incomes ?? 0)
-    const incomesFormat = formatAmount(accountIncomes)
+    const [accountBudget, setAccounIncomes] = useState(currentAccount?.budget ?? 0)
+    const incomesFormat = formatAmount(accountBudget)
     
-    const [accountOutcomes, setOutcomes] = useState(currentAccount?.outcomes ?? 0)
-    const outcomesFormat = formatAmount(accountOutcomes)
+    // const [accountOutcomes, setOutcomes] = useState(currentAccount?.outcomes ?? 0)
+    // const outcomesFormat = formatAmount(accountOutcomes)
 
     const getDifference = () => {
         const outcomesByMovements = currentAccountMovements
@@ -36,8 +36,8 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         const incomesByMovements = currentAccountMovements
             .filter((movement) => movement.type === 'income')
             .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
-        const incomesTotal = parseFloat(accountIncomes) + incomesByMovements 
-        const outcomesTotal = parseFloat(accountOutcomes) + outcomesByMovements 
+        const incomesTotal = parseFloat(accountBudget) + incomesByMovements 
+        const outcomesTotal = outcomesByMovements 
         return incomesTotal - outcomesTotal
     }
     const differenceFormat = formatAmount(getDifference())
@@ -66,7 +66,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
             noErrorsInForm = false
             setAccountNameError(t('accountNameRequiredError'))
         }
-        if (accountIncomes <= 0) {
+        if (accountBudget <= 0) {
             noErrorsInForm = false
             setAccountIncomesError(t('accountIncomesRequiredError'))
         }
@@ -81,8 +81,8 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         } else {
             const accountPrepared = {
                 name: accountName,
-                incomes: accountIncomes,
-                outcomes: accountOutcomes,
+                budget: accountBudget,
+                // outcomes: accountOutcomes,
             }
             onSaveAccount(accountPrepared)
         }
@@ -102,9 +102,9 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         setAccountIncomesError('')
     }
 
-    const handleOnAccountOutcomesChange = (event) => {
-        setOutcomes(event.target.value)
-    }
+    // const handleOnAccountOutcomesChange = (event) => {
+    //     setOutcomes(event.target.value)
+    // }
 
     return (
         <form className={ styles.MARAccountDetailForm } key={ account?.id ?? -1 }>
@@ -130,16 +130,16 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 error={accountNameError}
                 variant={ isNewAccount ? '' : 'no-editable' }/>
             <MARInput
-                label={t('accountIncomesField')}
-                id='accountIncomes'
-                value={ isNewAccount ? accountIncomes : incomesFormat }
+                label={t('accountBudgetField')}
+                id='accountBudget'
+                value={ isNewAccount ? accountBudget : incomesFormat }
                 onInput={ handleOnAccountIncomesChange }
                 placeholder={t('accountIncomesFieldPlaceholder')}
                 disabled={!isNewAccount}
                 error={accountIncomesError}
                 type={ isNewAccount ? 'number' : 'text' }
                 variant={ isNewAccount ? '' : 'no-editable'} />
-            <MARInput
+            {/* <MARInput
                 label={ t('accountOutcomesField') }
                 id='accountOutcomes'
                 value={ isNewAccount ? accountOutcomes : outcomesFormat }
@@ -147,9 +147,9 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
                 placeholder={ t('accountOutcomesFieldPlaceholder') }
                 disabled={!isNewAccount}
                 type={ isNewAccount ? 'number' : 'text' }
-                variant={ isNewAccount ? '' : 'no-editable'} />
+                variant={ isNewAccount ? '' : 'no-editable'} /> */}
             <MARInput
-                label={ t('accountBudgetField') }
+                label={ t('acountRemainingLabel') }
                 id='accountRest'
                 value={differenceFormat}
                 disabled={true}

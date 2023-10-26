@@ -30,7 +30,7 @@ export const getUserAccounts = async (userUID) => {
         return {
             id: account.id,
             name: accountData.name,
-            incomes: accountData.incomes,
+            budget: accountData.budget,
             outcomes: accountData.outcomes,
         };
     });
@@ -46,7 +46,7 @@ export const addAccount = async (userUID, account) => {
         );
         return await addDoc(userAccountsCollectionRef, {
             name: account.name,
-            incomes: parseFloat(account.incomes),
+            budget: parseFloat(account.budget),
             outcomes: parseFloat(account.outcomes),
             creationDate: account.creationDate,
         });

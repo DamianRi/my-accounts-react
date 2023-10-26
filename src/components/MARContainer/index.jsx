@@ -28,7 +28,7 @@ const MARContainer = () => {
         setIsLoading(true)
         const newAccount = {
             name: account.name,
-            incomes: account.incomes,
+            budget: account.budget,
             outcomes: account.outcomes,
             creationDate: new Date().toISOString(),
         }
