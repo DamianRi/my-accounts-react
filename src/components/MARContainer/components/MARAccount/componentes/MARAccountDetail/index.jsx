@@ -26,8 +26,6 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     const [accountBudget, setAccounIncomes] = useState(currentAccount?.budget || '')
     const incomesFormat = formatAmount(accountBudget || 0)
 
-    console.log(accountBudget, incomesFormat)
-    
     // const [accountOutcomes, setOutcomes] = useState(currentAccount?.outcomes ?? 0)
     // const outcomesFormat = formatAmount(accountOutcomes)
 
