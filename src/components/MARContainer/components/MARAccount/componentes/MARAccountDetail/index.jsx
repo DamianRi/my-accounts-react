@@ -23,8 +23,10 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
     // TODO: Manejar posteriormente el periodo de los movimientos
     // const [periodIndex, setPeriodIndex] = useState(new Date().getMonth())
 
-    const [accountBudget, setAccounIncomes] = useState(currentAccount?.budget ?? 0)
-    const incomesFormat = formatAmount(accountBudget)
+    const [accountBudget, setAccounIncomes] = useState(currentAccount?.budget || '')
+    const incomesFormat = formatAmount(accountBudget || 0)
+
+    console.log(accountBudget, incomesFormat)
     
     // const [accountOutcomes, setOutcomes] = useState(currentAccount?.outcomes ?? 0)
     // const outcomesFormat = formatAmount(accountOutcomes)
@@ -36,7 +38,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
         const incomesByMovements = currentAccountMovements
             .filter((movement) => movement.type === 'income')
             .reduce((accumulator, movement) => accumulator + parseFloat(movement.amount), 0)
-        const incomesTotal = parseFloat(accountBudget) + incomesByMovements 
+        const incomesTotal = parseFloat(accountBudget || 0) + incomesByMovements 
         const outcomesTotal = outcomesByMovements 
         return incomesTotal - outcomesTotal
     }
@@ -66,7 +68,7 @@ const MARAccountDetail = ({ account, onSaveAccount }) => {
             noErrorsInForm = false
             setAccountNameError(t('accountNameRequiredError'))
         }
-        if (accountBudget <= 0) {
+        if (!accountBudget || accountBudget <= 0) {
             noErrorsInForm = false
             setAccountIncomesError(t('accountIncomesRequiredError'))
         }
