@@ -12,7 +12,8 @@ const MARInput = ({
     type = 'text',
     prependIcon,
     appendIcon,
-    variant = 'editable'
+    variant = 'editable',
+    autoFocus,
 }) => {
     const prependIconComponent = () => {
         const icon = `fa-solid ${prependIcon}`
@@ -47,6 +48,7 @@ const MARInput = ({
                         disabled={ disabled || variant === 'no-editable' }
                         id={ id }
                         placeholder={ placeholder }
+                        autoFocus={ autoFocus }
                     />
                     {
                         error &&

@@ -37,6 +37,7 @@ const MARAccountMovementsItemDescription = ({
                 disabled={ disabled }
                 variant={ disabled ? 'no-editable': '' }
                 error={ descriptionError }
+                autoFocus={ id === -1 }
                 />
             <MARInput
                 id={ `${id}Amount` }

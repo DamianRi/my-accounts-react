@@ -7,8 +7,8 @@ import { useState } from "react"
 const MARAccountMovements = ({ movements, onSaveMovement }) => {
     const { t, } = useTranslation()
 
-    const incomeMovementType = 'income' // t('accountMovementIncomeType')
-    const outcomeMovementType = 'outcome' // t('accountMovementOutcomeType')
+    const incomeMovementType = 'income'
+    const outcomeMovementType = 'outcome'
     const [addNewMovement, setAddNewMovement] = useState(false)
     const [newMovementType, setNewMovementType] = useState(incomeMovementType)
 
@@ -52,9 +52,9 @@ const MARAccountMovements = ({ movements, onSaveMovement }) => {
                 {
                     addNewMovement &&
                     <MARAccountMovementsItem
+                        id={-1}
                         type={ newMovementType }
                         description={''}
-                        amount={0}
                         creationDate={new Date()}
                         editable={ true }
                         onSaveMovement={ handleOnSaveMovement }
