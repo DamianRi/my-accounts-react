@@ -1,8 +1,13 @@
-# React + Vite
+# MisCuentas
+This project a PWA to have an accountability of our money and know "where does our money go?".
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies
+For its implementación I use:
 
-Currently, two official plugins are available:
+- React (18.2.0): to create the UI components
+- Firebase (10.5.0): to make the conection with Firestore
+- Fontawesome (6.4.2): to add icons
+- Vite (4.4.5): to organize/bundle our files
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# PWA
+[MisCuentas](https://frontend-cf-645a3.web.app/)
