@@ -1,14 +1,15 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDxPAyQOckEj9TUb-Xc-FAldX6UFmQLiV0",
-    authDomain: "frontend-cf-645a3.firebaseapp.com",
-    projectId: "frontend-cf-645a3",
-    storageBucket: "frontend-cf-645a3.appspot.com",
-    messagingSenderId: "488199446660",
-    appId: "1:488199446660:web:d970a4dfcbe89b2e4fa2d1",
+    apiKey: "AIzaSyA6jHdb1tdDDNHwbkhnVJMfp63C3ZxBY80",
+    authDomain: "personal-project-352ac.firebaseapp.com",
+    projectId: "personal-project-352ac",
+    storageBucket: "personal-project-352ac.appspot.com",
+    messagingSenderId: "314701737314",
+    appId: "1:314701737314:web:56b259b9cf03836336d03b",
 };
 
+// Initialize Firebase
 export const firebaseAppConfig = initializeApp(firebaseConfig);
 import("./firebase/firebase_auth_google_provider");
 import("./firebase/firebase_firestore_users");
