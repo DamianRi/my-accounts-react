@@ -10,9 +10,12 @@ const MARErrorHandler = () => {
         {
             error &&
             <div className={ styles.MARErrorHandler }>
-                <div>
-                    <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" />
-                    <p>{ error }</p>
+                <div className={ styles.MARErrorHandlerContainer }>
+                    <span>
+                        <FontAwesomeIcon icon="fa-solid fa-triangle-exclamation" />
+                        Error
+                    </span>
+                    <p>{ JSON.stringify(error) }</p>
                 </div>
                 <button onClick={ () => setError(null) }>
                     <FontAwesomeIcon icon="fa-solid fa-xmark" />

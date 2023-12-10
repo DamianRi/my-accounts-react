@@ -11,7 +11,7 @@ firebaseAuth.setPersistence(browserLocalPersistence);
 
 const login = async () => {
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(firebaseAuth, googleProvider)
+    return await signInWithPopup(firebaseAuth, googleProvider)
         .then((result) => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;

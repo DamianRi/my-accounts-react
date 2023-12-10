@@ -1,10 +1,11 @@
 import {
     getFirestore,
     collection,
-    addDoc,
     getDocs,
     query,
     orderBy,
+    setDoc,
+    doc,
 } from "firebase/firestore";
 import { firebaseAppConfig } from "../firebase";
 import { USERS_DOC } from "./firebase_firestore_users";
@@ -37,21 +38,13 @@ export const getUserAccounts = async (userUID) => {
 };
 
 export const addAccount = async (userUID, account) => {
-    try {
-        const userAccountsCollectionRef = collection(
-            db,
-            USERS_DOC,
-            userUID,
-            ACCOUNTS_DOC
-        );
-        return await addDoc(userAccountsCollectionRef, {
-            name: account.name,
-            budget: parseFloat(account.budget),
-            outcomes: parseFloat(account.outcomes),
-            creationDate: account.creationDate,
-        });
-    } catch (error) {
-        console.error("Error on save account ", error);
-        return Promise.reject(new Error("Error on save account."));
-    }
+    const userAccountsCollectionRef = doc(
+        collection(db, USERS_DOC, userUID, ACCOUNTS_DOC)
+    );
+    return setDoc(userAccountsCollectionRef, {
+        name: account.name,
+        budget: parseFloat(account.budget),
+        outcomes: parseFloat(account.outcomes),
+        creationDate: account.creationDate,
+    });
 };

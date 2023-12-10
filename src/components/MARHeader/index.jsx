@@ -27,9 +27,12 @@ const MARHeader = ({ title }) => {
             .then((result) => {
                 setUser(result.user)
                 addUser(result.user)
+                    .then(() => {
+                        fetchAccounts()
+                    })
+                    .catch(() => setError('No se ha podido obtener la información del usuario.'))
                 setSuccessMessage("Se ha iniciado sesión.")
             })
-            .then(() => fetchAccounts())
             .catch((error) => {
                 setError(error.toString())
             })

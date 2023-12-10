@@ -17,15 +17,25 @@ const useStore = create((set, get) => ({
     // Accounts
     accounts: [],
     fetchAccounts: async () => {
+        set(() => ({ isLoading: true }));
         const userUID = get().user.uid;
-        try {
-            await set(() => ({ isLoading: true }));
-            const accounts = userUID ? await getUserAccounts(userUID) : [];
-            if (accounts.length) await get().setCurrentAccount(accounts[0]);
-            await set(() => ({ accounts, isLoading: false }));
-        } catch (error) {
-            console.error("Error al consultar accounts ", userUID, error);
-            await set(() => ({ error, isLoading: false }));
+        if (userUID) {
+            await getUserAccounts(userUID)
+                .then((accounts) => {
+                    if (accounts.length > 0) {
+                        get().setCurrentAccount(accounts[0]);
+                    }
+                    set(() => ({ accounts }));
+                })
+                .catch((error) => {
+                    console.error(
+                        "Error al consultar accounts ",
+                        userUID,
+                        error
+                    );
+                    set(() => ({ accounts: [] }));
+                })
+                .finally(() => set(() => ({ isLoading: false })));
         }
     },
     clearAccounts: () => set(() => ({ accounts: [] })),
